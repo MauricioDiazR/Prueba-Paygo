@@ -2,8 +2,11 @@ from rest_framework import serializers
 from roles.models import Role, Permission, User, LANGUAGE_CHOICES, STYLE_CHOICES
 
 class PermissionSerializer(serializers.Serializer):
+    
     name = serializers.CharField(allow_blank=False,allow_null=False)
-
+    class Meta:
+        model = Permission
+        fields = ['id','name']
     def create(self, validated_data):
         return Permission.objects.create(**validated_data)
 
@@ -15,7 +18,7 @@ class RoleSerializer(serializers.ModelSerializer):
     
     class Meta:
         model = Role
-        fields = ['name', 'permission','active']
+        fields = ['id','name', 'permission','active']
 
     def create(self, validated_data):
         permission = validated_data.pop('permission')

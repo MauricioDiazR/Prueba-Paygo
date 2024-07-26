@@ -27,7 +27,6 @@ class PermissionDetail(mixins.RetrieveModelMixin,mixins.UpdateModelMixin,
     queryset = Permission.objects.all()
     serializer_class = PermissionSerializer
     
-
     def get(self, request, *args, **kwargs):
         return self.retrieve(request, *args, **kwargs)
 
@@ -59,7 +58,6 @@ class RoleDetail(mixins.RetrieveModelMixin,
     queryset = Role.objects.all()
     serializer_class = RoleSerializer
     
-
     def get(self, request, *args, **kwargs):
         return self.retrieve(request, *args, **kwargs)   
          
@@ -71,9 +69,21 @@ class RoleDetail(mixins.RetrieveModelMixin,
             return Response({'status': 'Role deactivado'}, status=status.HTTP_200_OK)
         self.destroy(request, *args, **kwargs)
         return Response({'status': 'Role eliminado'}, status=status.HTTP_200_OK)
-    
     #Verificar que el role no este asociado a un usuario, de estart asociado no se elimina
     #sino que se pone en inactivo.
+
+    def put(self, request, *args, **kwargs):
+        role = self.get_object()
+        data = request.data
+        role.name = data.get('name', role.name)
+        permissions = data.get('permission', [])
+        if permissions:
+            permission_objects = Permission.objects.filter(id__in=permissions)
+            role.permission.set(permission_objects)
+        role.save()
+        serializer = self.get_serializer(role)
+        return Response(serializer.data, status=status.HTTP_200_OK)
+    
 class UserList(mixins.ListModelMixin, mixins.CreateModelMixin,
                generics.GenericAPIView):
     queryset = User.objects.all()

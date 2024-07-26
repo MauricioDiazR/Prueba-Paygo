@@ -2,3 +2,95 @@ body{
   background: #202020;
   color: white;
 }
+
+h1{
+  font-size: 50px;
+  margin: 0;
+}
+a{
+  text-decoration: none;
+  color: #71a3d8;
+}
+
+.role-name{
+  font-size: x-large;
+}
+.role-list-page{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100vh;
+  width: 100vw;
+}
+
+.header{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  align-content: center;
+  justify-content: center;
+  width: 1200px;
+}
+.btn-go-to-create{
+  background: #007bff;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 5px;
+  text-decoration: none;
+  font-size: 18px;
+  text-align: center;
+  margin-left: 8px;
+}
+
+.btn-create{
+  background: #007bff;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 5px;
+  text-decoration: none;
+  font-size: 18px;
+  text-align: center;
+  margin-left: 8px;
+  width: 50%;
+}
+
+.btn-save{
+  background: #269939;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 5px;
+  text-decoration: none;
+  font-size: 18px;
+  text-align: center;
+  border: none;
+  width: 50%;
+}
+
+.form{
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 400px;
+  margin-top: 50px;
+  font-size: medium;
+}
+
+.input-control{
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  font-size: x-large;
+}
+
+.input-control input, .input-control select{
+  width: 60%;
+  height: 30px;
+  border: none;
+}
+
+.input-control--buttons{
+  justify-content: flex-end;
+}
