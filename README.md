@@ -1,31 +1,45 @@
-Proyecto Prueba Analista de Software
+# Prueba para Analista de Software
+## Resumen
+Este proyecto de forma visual permite listar, editar y crear roles. También hay endpoints para listar, crear, editar y eliminar permisos y usuarios
 
-Resumen:
-se entrega un proyecto que permite listar, editar y crear roles
+## Consideraciones del Proyecto
+### Cambio en el Modelo de Usuario:
+- Se eliminó el parámetro de permisos (many-to-many) del modelo User, ya que el modelo Role ya lo contenía, evitando así redundancias.
 
-Consideraciones entrega del proyecto:
-1- Se cambio el modelo de User, eliminando el parametro de Permission(many-to-may), debido a que Role ya lo contenia, entonces seria redundante
+### Simplificación del Modelo Role:
+- El modelo Role actualmente permite almacenar un solo permiso. La capacidad de almacenar varios permisos se implementará en una futura versión.
 
-2- Para simplificar el proyecto, el modelo Role, solo permite almacenar 1 solo permiso. El almacenamiento de varios permisos quedo para una futura entrega
+### Endpoint de Clonación:
+- Dado que Role tiene un nombre único y solo un permiso, no fue necesario crear un endpoint de clonación.
 
-3- Debido a que el Role tiene nombre único y que sólo tiene 1 permiso, no se vio la necesidad de crear un endpoint de clonacion
+### Asignación de Roles y Autenticación:
+- En el modelo User existe un campo Role como many-to-many, lo que impide asignar autenticación directamente. Para crear un Role, se requiere un User, pero para crear un User se requiere que el campo Role no esté vacío.
+- Se sugiere añadir un modelo llamado Employee (con campos como Role, name, etc.) y mantener el modelo User (con username, password) solo para autenticación.
+  
+## Requerimientos
+Node.js 16 o superior
+npm
+python
+pip
 
-4- Debido a que el modelo de Usuario tiene el campo Role tipo many-tomany , no se puede asignar una autenticación, ya para crear un Role, se requiere un usuario, pero para crear un usuario se requiere que el campo Role no esté vacio, se sugiere que se añada otro modelo llamado Employe (con Role, name, etc.) y que también se tenga el modelo usuario (username, password) solo para la autenticación.
-
-Requerimientos:
-1-Node 16 o superior
-2-npm
-Instalación
-
-1-Front-End
-Abrir una terminal ubicada en la carpeta del Front (client) y ejecutar npm install, aqui un ejemplo
+## Instalación
+Front-End
+Abrir una terminal en la carpeta del cliente (client) y ejecutar:`npm install`ejemplo
+```
 ...\Prueba\client>npm install
-
-2-Back-End
-Abrir una terminal ubicada en la carpeta principal del proyecto ejecutar el siguiente comando
+```
+Back-End
+Abrir una terminal en la carpeta principal del proyecto y ejecutar `python -m pip install -r requirements.txt` ejemplo:
+```
 ...\Prueba>python -m pip install -r requirements.txt
+```
 
-Ejecución
-ejecutar el Backend: abrir una terminal ubicada en la carpeta principal del proyecto (Prueba) y ejecutar el comando python manage.py runserver
-
-Ejecutar el front: abrir una nueva terminal(y sin cerrar la anterior) dirigirse la carpeta client y ejecurtar el comando npm run dev
+##Ejecución
+1- Abrir una terminal en la carpeta principal del proyecto (Prueba) y ejecutar
+```
+python manage.py runserver
+```
+2- Abrir una nueva terminal (sin cerrar la anterior), dirigirse a la carpeta client y ejecutar
+```
+npm run dev
+```
